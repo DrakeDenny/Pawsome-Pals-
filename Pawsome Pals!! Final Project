@@ -1,0 +1,214 @@
+import tkinter as tk
+from tkinter import messagebox
+import random
+
+# Function to show a fun fact about dogs
+def show_dog_fact():
+    facts = [
+        "Dogs have a sense of time and can predict future events.",
+        "Dogs' sense of smell is at least 40x better than ours.",
+        "Dogs can hear 4 times as far as humans.",
+        "A dog's nose print is unique, much like a human's fingerprint.",
+        "Dogs are Color-Blind.",
+    ]
+    fact = random.choice(facts)
+    messagebox.showinfo("Dog Fact", fact)
+
+# Function to display a personalized greeting
+def show_greeting():
+    dog_name = entry.get()
+    greeting = f"Hello, {dog_name}! Welcome to the Pawsome Pals App!"
+    messagebox.showinfo("Greeting", greeting)
+
+# Function to open the second window and hide the main window
+def open_second_window():
+    root.withdraw()  # Hide the main window
+    second_window = tk.Toplevel(root)
+    second_window.title("Second Window")
+    second_window.config(bg="lightyellow")
+
+    tk.Label(second_window, text="Welcome to the Second Window!", font=("Helvetica", 16), bg="lightyellow", fg="darkred").pack(pady=20)
+    
+    # Add content to the second window
+    tk.Label(second_window, text="This is where you can find more Pawsome features.", font=("Helvetica", 14), bg="lightyellow", fg="darkred").pack(pady=10)
+    
+    # Example: Detailed Dog Breed Information
+    def show_breed_info():
+        breeds = {
+            "Labrador Retriever": "Friendly, outgoing, and high-spirited companions.",
+            "German Shepherd": "Courageous, confident, and smart.",
+            "Golden Retriever": "Friendly, intelligent, and devoted.",
+            "Bulldog": "Calm, courageous, and friendly.",
+            "Beagle": "Curious, friendly, and merry.",
+        }
+        breed = random.choice(list(breeds.keys()))
+        info = breeds[breed]
+        messagebox.showinfo(breed, info)
+    
+    tk.Button(second_window, text="Show Dog Breed Info", command=show_breed_info, font=("Helvetica", 14), bg="lightblue", fg="darkblue").pack(pady=10)
+    
+    # Example: Community Forum
+    def open_forum():
+        forum_window = tk.Toplevel(second_window)
+        forum_window.title("Community Forum")
+        forum_window.config(bg="lightgrey")
+        tk.Label(forum_window, text="Community Forum", font=("Helvetica", 14), bg="lightgrey", fg="black").pack(pady=10)
+        tk.Text(forum_window, height=15, width=50, font=("Helvetica", 12), bg="white", fg="black").pack(pady=10)
+        tk.Button(forum_window, text="Post", font=("Helvetica", 12), bg="lightgreen", fg="black").pack(pady=10)
+    
+    tk.Button(second_window, text="Open Forum", command=open_forum, font=("Helvetica", 14), bg="lightblue", fg="darkblue").pack(pady=10)
+    
+    # Example: Dog Health Tracker
+    def log_health_info():
+        health_window = tk.Toplevel(second_window)
+        health_window.title("Dog Health Tracker")
+        health_window.config(bg="lightpink")
+
+        tk.Label(health_window, text="Enter Health Information", font=("Helvetica", 14), bg="lightpink", fg="darkred").pack(pady=10)
+        
+        tk.Label(health_window, text="Vet Visit Date:", font=("Helvetica", 12), bg="lightpink", fg="darkred").pack(pady=5)
+        vet_date_entry = tk.Entry(health_window, font=("Helvetica", 12), bg="white", fg="black")
+        vet_date_entry.pack(pady=5)
+        
+        tk.Label(health_window, text="Vaccinations:", font=("Helvetica", 12), bg="lightpink", fg="darkred").pack(pady=5)
+        vaccinations_entry = tk.Entry(health_window, font=("Helvetica", 12), bg="white", fg="black")
+        vaccinations_entry.pack(pady=5)
+        
+        tk.Label(health_window, text="Medications:", font=("Helvetica", 12), bg="lightpink", fg="darkred").pack(pady=5)
+        medications_entry = tk.Entry(health_window, font=("Helvetica", 12), bg="white", fg="black")
+        medications_entry.pack(pady=5)
+        
+        def save_health_info():
+            vet_date = vet_date_entry.get()
+            vaccinations = vaccinations_entry.get()
+            medications = medications_entry.get()
+            # Save the information to a file or database
+            messagebox.showinfo("Health Info Saved", "Health information has been saved successfully.")
+        
+        tk.Button(health_window, text="Save", command=save_health_info, font=("Helvetica", 12), bg="lightgreen", fg="black").pack(pady=10)
+    
+    tk.Button(second_window, text="Log Health Info", command=log_health_info, font=("Helvetica", 14), bg="lightblue", fg="darkblue").pack(pady=10)
+    
+    # Example: Training Tips
+    def show_training_tip():
+        tips = [
+            "Start training your dog early.",
+            "Use positive reinforcement.",
+            "Be consistent with commands.",
+            "Keep training sessions short and fun.",
+            "Socialize your dog with other dogs and people."
+        ]
+        tip = random.choice(tips)
+        messagebox.showinfo("Training Tip", tip)
+    
+    tk.Button(second_window, text="Show Training Tip", command=show_training_tip, font=("Helvetica", 14), bg="lightblue", fg="darkblue").pack(pady=10)
+    
+    # Example: Daily Dog Challenges
+    def show_daily_challenge():
+        challenges = [
+            "Teach your dog a new trick.",
+            "Take your dog for a 30-minute walk.",
+            "Play a game of fetch.",
+            "Practice obedience training.",
+            "Give your dog a grooming session."
+        ]
+        challenge = random.choice(challenges)
+        messagebox.showinfo("Daily Dog Challenge", challenge)
+    
+    tk.Button(second_window, text="Show Daily Challenge", command=show_daily_challenge, font=("Helvetica", 14), bg="lightblue", fg="darkblue").pack(pady=10)
+    
+    # Function to close the second window and show the main window
+    def close_second_window():
+        second_window.destroy()
+        root.deiconify()  # Show the main window
+    
+    tk.Button(second_window, text="Close", command=close_second_window, font=("Helvetica", 14), bg="lightcoral", fg="white").pack(pady=10)
+
+# Create the main window
+root = tk.Tk()
+root.title("Pawsome Pals App")
+root.config(bg="lightblue")
+
+# Create the Costs Window
+def open_costs_window():
+    tk.Button(costs_window, text="Calculate Costs", command=calculate_cost, font=("Helvetica", 14), bg="lightblue", fg="darkblue").pack()
+    root = tk.Tk()
+    costs_window.title("Costs")
+    label = tk.Label(costs_window, text="This is the Costs window.")
+    label.grid()
+
+
+costs_window = tk.Toplevel(root)
+costs_window.title("Dog Costs")
+costs_window.config(bg="lightyellow")
+
+tk.Label(costs_window, text="Calculate Dog Costs", font=("Helvetica", 16), bg="lightyellow", fg="darkred").pack(pady=20)
+tk.Label(costs_window, text="Enter Costs for Your Dog:", font=("Helvetica", 14), bg="lightyellow", fg="darkred").pack(pady=10)
+
+tk.Label(costs_window, text="Pet Care:", font=("Helvetica", 12), bg="lightyellow", fg="darkred").pack()
+care_entry = tk.Entry(costs_window, font=("Helvetica", 12), bg="white", fg="black")
+care_entry.pack()
+
+tk.Label(costs_window, text="Grooming:", font=("Helvetica", 12), bg="lightyellow", fg="darkred").pack()
+grooming_entry = tk.Entry(costs_window, font=("Helvetica", 12), bg="white", fg="black")
+grooming_entry.pack()
+
+tk.Label(costs_window, text="Food:", font=("Helvetica", 12), bg="lightyellow", fg="darkred").pack()
+food_entry = tk.Entry(costs_window, font=("Helvetica", 12), bg="white", fg="black")
+food_entry.pack()
+
+tk.Label(costs_window, text="Toys/Accessories:", font=("Helvetica", 12), bg="lightyellow", fg="darkred").pack()
+toys_entry = tk.Entry(costs_window, font=("Helvetica", 12), bg="white", fg="black")
+toys_entry.pack()
+
+
+
+def calculate_cost():
+    try:
+        
+        care = float(care_entry.get())
+        grooming = float(grooming_entry.get())
+        food = float(food_entry.get())
+        toys = float(toys_entry.get())
+
+        total_cost = care + grooming + food + toys
+        messagebox.showinfo("Total Cost", f"The total cost for your dog is ${total_cost:.2f}")
+    except ValueError:
+        messagebox.showerror("Error", "Please enter valid numbers for all costs.")
+
+tk.Button(costs_window, text="Calculate Total Cost", command=calculate_cost, font=("Helvetica", 14), bg="lightblue", fg="darkblue").pack(pady=10)
+
+
+
+# Create a label
+label = tk.Label(root, text="Welcome to the Pawsome Pals App!", font=("Helvetica", 16), bg="lightblue", fg="darkblue")
+label.pack(pady=20)
+
+# Create an entry for the dog's name
+entry_label = tk.Label(root, text="Enter your dog's name:", font=("Helvetica", 14), bg="lightblue", fg="darkblue")
+entry_label.pack(pady=10)
+entry = tk.Entry(root, font=("Helvetica", 14), bg="white", fg="black")
+entry.pack(pady=10)
+
+# Create a button for the greeting
+greet_button = tk.Button(root, text="Show Greeting", command=show_greeting, font=("Helvetica", 14), bg="lightgreen", fg="black")
+greet_button.pack(pady=10)
+
+# Create a button for dog facts
+fact_button = tk.Button(root, text="Show Dog Fact", command=show_dog_fact, font=("Helvetica", 14), bg="lightgreen", fg="black")
+fact_button.pack(pady=10)
+
+# Create a button to open the second window
+second_window_button = tk.Button(root, text="Open Second Window", command=open_second_window, font=("Helvetica", 14), bg="lightgreen", fg="black")
+second_window_button.pack(pady=10)
+
+# Function to show a message box
+def show_message():
+    messagebox.showinfo("Message", "Thank You For Visiting and have a Pawsome Day!")
+# Create a button to trigger the message box
+button = tk.Button(root, text="Show Goodbye Message", command=show_message)
+button.pack()
+
+
+# Run the application
+root.mainloop()
